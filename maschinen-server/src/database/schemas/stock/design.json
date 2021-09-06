@@ -1,0 +1,5 @@
+{
+    "validate_doc_update": "function (newDoc, oldDoc, userCtx, secObj) { if (!newDoc.name) { throw({ forbidden: 'doc.name is required' }) } if (!Array.isArray(newDoc.data)) { throw({ forbidden: 'doc.data array is required' }); } for (const item of newDoc.data) { if (!item.timestamp) { throw({ forbidden: 'item.timestamp is required' }); } if (!item.data.high) { throw({ forbidden: 'item.data.high is required' }); } if (!item.data.low) { throw({ forbidden: 'item.data.low is required' }); } } }",
+    "required": ["name", "data"],
+    "language": "javascript"
+}

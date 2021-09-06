@@ -1,0 +1,47 @@
+version: "3.3"
+services:
+  web-static:
+    build:
+      context: ./mashinen-frontend
+      args:
+        - STOCK_INTERVAL_ARG=60000
+        - STOCK_DATABASE_ARG=http://localhost:5984/new-stock
+    volumes:
+      - static-files:/usr/local/app/dist/mashinen-frontend
+    depends_on:
+      - server
+  web:
+    image: nginx
+    ports:
+      - 8080:80
+    volumes:
+      - static-files:/usr/share/nginx/html
+    environment:
+      - NGINX_PORT=80
+    depends_on:
+      - web-static
+  server:
+    build:
+      context: ./maschinen-server
+    ports:
+    - 8081:3000
+    env_file:
+      - ./.env.production
+    depends_on:
+      - couch
+    restart: unless-stopped
+  couch:
+    image: couchdb
+    ports:
+    - 5984:5984
+    environment:
+      - COUCHDB_PASSWORD=password
+      - COUCHDB_USER=admin
+    volumes:
+    - couch-db-source:/opt/couchdb/data
+    - ./couch-config:/opt/couchdb/etc/local.d
+volumes:
+  static-files:
+    driver: local
+  couch-db-source:
+    driver: local

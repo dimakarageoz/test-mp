@@ -1,0 +1,7 @@
+<div>
+  <div *ngIf="(stocks$ | async) as stocks">
+    <div *ngFor="let stock of stocks">
+      <app-chart [stockData]="stock"></app-chart>
+    </div>
+  </div>
+</div>
