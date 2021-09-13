@@ -5,7 +5,7 @@ services:
       context: ./mashinen-frontend
       args:
         - STOCK_INTERVAL_ARG=60000
-        - STOCK_DATABASE_ARG=http://localhost:5984/new-stock
+        - STOCK_DATABASE_ARG=http://admin:password@localhost:5984/new-stock
     volumes:
       - static-files:/usr/local/app/dist/mashinen-frontend
     depends_on:
