@@ -6,5 +6,5 @@ export const configurationSchema = {
     [Environment.CouchDatabase]: Joi.string().required(),
     [Environment.DatabaseName]: Joi.string().required(),
     [Environment.StockAuth]: Joi.string().required(),
-    [Environment.StockConsumeInterval]: Joi.number().required()
+    [Environment.StockConsumeInterval]: Joi.string().required()
 };

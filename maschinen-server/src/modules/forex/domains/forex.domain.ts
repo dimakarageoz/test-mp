@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { StockDataService } from '../module/stock-source/stock-data.service';
-import { StocksItems } from '../constants/stock.constants';
+import { StockNames, StocksItems } from '../constants/stock.constants';
 import { DatabaseService } from '../../../database/database.service';
 import { IStock } from '../../../models/stock.models';
 
@@ -22,7 +22,7 @@ export class ForexDomain {
 
     private async loadStocksData(): Promise<void> {
         await Promise.all([
-            StocksItems.map(async (stockName: string) => {
+            StocksItems.map(async stockName => {
                 const stockData = await this.stockDataService.getStockData(stockName);
 
                 if (stockData) {
@@ -32,7 +32,7 @@ export class ForexDomain {
         ]);
     }
 
-    private async saveStockData(name: string, data: Array<IStock>): Promise<void> {
+    private async saveStockData(name: StockNames, data: Array<IStock>): Promise<void> {
         await this.databaseService.createOrUpdate({ name, data })
     }
 }

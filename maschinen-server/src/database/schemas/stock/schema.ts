@@ -1,6 +1,7 @@
 import { IStock } from '../../../models/stock.models';
+import { StockNames } from '../../../modules/forex/constants/stock.constants';
 
 export interface IStockSchema {
-    name: string,
+    name: StockNames,
     data: Array<IStock>
 }

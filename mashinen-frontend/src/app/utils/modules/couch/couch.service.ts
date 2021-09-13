@@ -18,8 +18,8 @@ export class CouchServer {
     const result = await db.allDocs();
 
     const ids = result.rows
-      .filter((item: any) => item.id !== '_design/validation')
-      .map((item: any) => item.id);
+      .filter(item => item.id !== '_design/validation')
+      .map(item => item.id);
 
     return Promise.all(
       ids.map((id: string) => <Promise<IStockTread>>db.get(id))

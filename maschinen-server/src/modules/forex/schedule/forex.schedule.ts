@@ -17,7 +17,7 @@ export class ForexScheduleJob implements OnModuleInit, OnModuleDestroy {
     }
 
     public onModuleInit(): void {
-        const interval = this.configService.get(Environment.StockConsumeInterval);
+        const interval = +this.configService.get(Environment.StockConsumeInterval);
 
         this.createInterval(interval, () => this.forexDomain.uploadStock());
     }

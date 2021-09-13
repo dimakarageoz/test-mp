@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { IStockDataTimestamp, IStockTread } from '../../models/stock.models';
 import { ChartService } from '../../utils/services/chart.service';
-import { StockColor, StockLabel } from '../stock.constants';
+import { StockColor, StockItems, StockLabel } from '../stock.constants';
 
 @Component({
   selector: 'app-chart',
@@ -25,7 +25,7 @@ export class ChartComponent implements AfterViewInit {
     )
   }
 
-  public getLabel(name: string): string {
+  public getLabel(name: StockItems): string {
     return StockLabel[name];
   }
 }

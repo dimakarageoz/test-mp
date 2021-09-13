@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { Environment } from '../../../../constants/config.constants';
 import { responseMapper } from './stock-data.mapper';
 import { IStock } from '../../../../models/stock.models';
+import { StockNames } from '../../constants/stock.constants';
 
 const GET_STOCK = '/query?function=TIME_SERIES_INTRADAY&symbol={company}&interval=1min&apikey={stockAuthKey}';
 
@@ -16,7 +17,7 @@ export class StockDataService {
         private configService: ConfigService
     ) {}
 
-    public getStockData(stockName: string): Promise<Array<IStock> | void> {
+    public getStockData(stockName: StockNames): Promise<Array<IStock> | void> {
         try {
             // NestJs doesn't work well with code that is run on "OnInit" Hook (HttpService.get throw the issue)
             // I didn't find the explanation of the bug, but after searching,
@@ -31,7 +32,7 @@ export class StockDataService {
         }
     }
 
-    private getSourceUrl(stockName: string): string {
+    private getSourceUrl(stockName: StockNames): string {
         const stockBase = this.configService.get(Environment.StockUrl, '');
         const token = this.configService.get(Environment.StockAuth, '');
         const getStock = GET_STOCK
